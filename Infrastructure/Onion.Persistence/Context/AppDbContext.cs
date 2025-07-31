@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Onion.Domain.Entities;
 
-namespace Onion.Persistance.Context
+namespace Onion.Persistence.Context
 {
     public class AppDbContext : DbContext
     {
