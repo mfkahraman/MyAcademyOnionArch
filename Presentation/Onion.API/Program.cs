@@ -1,8 +1,10 @@
 using Onion.Persistence.Extensions;
+using Onion.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddApplicationExt();
 builder.Services.AddPersistenceExt(builder.Configuration);
 
 builder.Services.AddControllers();

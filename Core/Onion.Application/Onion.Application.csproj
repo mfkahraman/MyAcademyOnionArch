@@ -10,4 +10,14 @@
     <ProjectReference Include="..\Onion.Domain\Onion.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\CQRS\Commands\" />
+    <Folder Include="Features\CQRS\Queries\" />
+    <Folder Include="Features\Mediator\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+  </ItemGroup>
+
 </Project>
