@@ -12,6 +12,7 @@ namespace Onion.Application.Mappings
             CreateMap<Category, GetCategoryQueryResult>().ReverseMap();
             CreateMap<Category, GetCategoryByIdQueryResult>().ReverseMap();
             CreateMap<Category, CreateCategoryCommand>().ReverseMap();
+            CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
         }
     }
 }
