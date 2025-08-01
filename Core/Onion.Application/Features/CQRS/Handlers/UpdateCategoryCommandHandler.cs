@@ -17,7 +17,7 @@ namespace Onion.Application.Features.CQRS.Handlers
             }
   
             var category = mapper.Map<Category>(command);
-            repository.UpdateAsync(category);
+            repository.Update(category);
             return await unitOfWork.SaveChangesAync();
         }
     }

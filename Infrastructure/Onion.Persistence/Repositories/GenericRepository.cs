@@ -30,7 +30,7 @@ namespace Onion.Persistence.Repositories
             return entity;
         }
 
-        public void UpdateAsync(TEntity entity)
+        public void Update(TEntity entity)
         { 
             context.Set<TEntity>().Update(entity);
         }

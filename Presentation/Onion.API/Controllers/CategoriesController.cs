@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Onion.Application.Features.CQRS.Commands;
 using Onion.Application.Features.CQRS.Handlers;
+using Onion.Application.Features.CQRS.Queries;
 
 namespace Onion.API.Controllers
 {
@@ -25,17 +26,18 @@ namespace Onion.API.Controllers
             return Ok(values);
         }
 
-        [HttpGet("get-by-id/{id}")]
+        [HttpGet("get-category-by-id/{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var value = await byIdHandler.Handle(new Application.Features.CQRS.Queries.GetCategoryByIdQuery(id));
-
-            if (value is null)
+            try
             {
-                return NotFound($"Category with ID {id} not found.");
+                var value = await byIdHandler.Handle(new GetCategoryByIdQuery(id));
+                return Ok(value);
             }
-
-            return Ok(value);
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost("create-category")]
@@ -49,7 +51,7 @@ namespace Onion.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = command.Name }, command);
         }
 
-        [HttpPost("update-category")]
+        [HttpPut("update-category")]
         public async Task<IActionResult> Update(UpdateCategoryCommand command)
         {
             var result = await updateHandler.Handle(command);
