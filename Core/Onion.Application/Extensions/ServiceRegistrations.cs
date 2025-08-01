@@ -13,6 +13,7 @@ namespace Onion.Application.Extensions
             services.AddScoped<GetCategoryByIdQueryHandler>();
             services.AddScoped<CreateCategoryCommandHandler>();
             services.AddScoped<UpdateCategoryCommandHandler>();
+            services.AddScoped<DeleteCategoryCommandHandler>();
         }
     }
 }
