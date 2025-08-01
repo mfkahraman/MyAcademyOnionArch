@@ -7,7 +7,7 @@ using Onion.Domain.Entities;
 namespace Onion.Application.Features.CQRS.Handlers
 {
     public class GetCategoryByIdQueryHandler(IRepository<Category> repository,
-                                                IMapper mapper)
+                                             IMapper mapper)
     {
         public async Task<GetCategoryByIdQueryResult> Handle(GetCategoryByIdQuery query)
         {
