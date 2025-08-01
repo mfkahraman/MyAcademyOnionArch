@@ -12,7 +12,7 @@ namespace Onion.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var values = await categoryHandler.Handle();
-            if (values is null || !values.Any())
+            if (values is null || values.Count == 0)
             {
                 return NotFound("No categories found.");
             }
