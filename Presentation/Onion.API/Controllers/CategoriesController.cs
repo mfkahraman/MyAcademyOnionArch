@@ -44,11 +44,11 @@ namespace Onion.API.Controllers
         public async Task<IActionResult> Create(CreateCategoryCommand command)
         {
             var result = await createHandler.Handle(command);
-            if (!result)
+            if (result is null)
             {
-                return BadRequest("Failed to create category.");
+                return BadRequest("Category creation failed.");
             }
-            return CreatedAtAction(nameof(GetById), new { id = command.Name }, command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
         [HttpPut("update-category")]

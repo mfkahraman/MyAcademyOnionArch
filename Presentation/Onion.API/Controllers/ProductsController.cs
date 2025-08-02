@@ -38,16 +38,12 @@ namespace Onion.API.Controllers
         {
             var result = await mediator.Send (command);
 
-            if (result is null)
+            if (result is null || result.Id == Guid.Empty)
             {
                 return BadRequest("Product creation failed.");
             }
-            if (result.Id == Guid.Empty)
-            {
-                return BadRequest("Product creation failed, ID is empty.");
-            }
 
-            return CreatedAtAction(nameof(GetAll), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
     }
 }
