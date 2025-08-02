@@ -3,11 +3,5 @@ using Onion.Application.Features.Mediator.Results;
 
 namespace Onion.Application.Features.Mediator.Commands
 {
-    public record CreateProductCommand : IRequest<GetProductQueryResult>
-    {
-        public required string Name { get; init; }
-        public decimal Price { get; init; }
-        public int Stock { get; init; }
-        public Guid CategoryId { get; init; }
-    }
+    public record CreateProductCommand(string Name, decimal Price, int Stock, Guid CategoryId) : IRequest<GetProductQueryResult>;
 }

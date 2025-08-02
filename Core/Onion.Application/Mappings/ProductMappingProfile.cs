@@ -11,6 +11,7 @@ namespace Onion.Application.Mappings
         {
             CreateMap<Product, GetProductQueryResult>();
             CreateMap<Product, CreateProductCommand>().ReverseMap();
+            CreateMap<Product, UpdateProductCommand>().ReverseMap();
         }
     }
 }

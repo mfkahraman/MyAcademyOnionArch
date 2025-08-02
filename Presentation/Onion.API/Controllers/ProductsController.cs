@@ -53,7 +53,7 @@ namespace Onion.API.Controllers
             var result = await mediator.Send(command);
             if (!result)
             {
-                return NotFound($"Product with ID {command.Id} not found.");
+                return BadRequest("Product update failed. Please check the provided data.");
             }
             return Ok(result);
         }
@@ -61,12 +61,12 @@ namespace Onion.API.Controllers
         [HttpDelete("delete-product/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var result = await mediator.Send(new DeleteProductCommand(id));
+            var result = await mediator.Send(new RemoveProductCommand(id));
             if (!result)
             {
-                return NotFound($"Product with ID {id} not found.");
+                return BadRequest($"Product with ID {id} could not be deleted. It may not exist or there was an error.");
             }
-            return NoContent();
+            return Ok($"Product with ID {id} has been successfully deleted.");
         }
     }
 }
