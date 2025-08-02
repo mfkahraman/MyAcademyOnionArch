@@ -13,8 +13,8 @@ namespace Onion.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var products = await mediator.Send(new GetProductQuery());
-            
-            if (products.Count !> 0)
+
+            if (products is null || products.Count == 0)
             {
                 return NotFound("No products found.");
             }
@@ -30,13 +30,14 @@ namespace Onion.API.Controllers
             {
                 return NotFound($"Product with ID {id} not found.");
             }
+
             return Ok(product);
         }
 
         [HttpPost("create-product")]
         public async Task<IActionResult> Create(CreateProductCommand command)
         {
-            var result = await mediator.Send (command);
+            var result = await mediator.Send(command);
 
             if (result is null || result.Id == Guid.Empty)
             {
@@ -44,6 +45,28 @@ namespace Onion.API.Controllers
             }
 
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        }
+
+        [HttpPut("update-product")]
+        public async Task<IActionResult> Update(UpdateProductCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (!result)
+            {
+                return NotFound($"Product with ID {command.Id} not found.");
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("delete-product/{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await mediator.Send(new DeleteProductCommand(id));
+            if (!result)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+            return NoContent();
         }
     }
 }

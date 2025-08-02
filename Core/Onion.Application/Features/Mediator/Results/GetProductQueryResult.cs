@@ -9,6 +9,5 @@ namespace Onion.Application.Features.Mediator.Results
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public Guid CategoryId { get; set; }
-        public required GetCategoryQueryResult Category { get; set; }
     }
 }
