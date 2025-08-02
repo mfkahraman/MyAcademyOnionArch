@@ -9,6 +9,11 @@ namespace Onion.Application.Extensions
         {
             services.AddAutoMapper(cfg => { }, typeof(ServiceRegistrations).Assembly);
 
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(ServiceRegistrations).Assembly);
+            });
+
             services.AddScoped<GetCategoryQueryHandler>();
             services.AddScoped<GetCategoryByIdQueryHandler>();
             services.AddScoped<CreateCategoryCommandHandler>();
