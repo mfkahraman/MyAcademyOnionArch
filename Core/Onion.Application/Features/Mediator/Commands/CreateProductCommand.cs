@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using Onion.Application.Features.Mediator.Results;
 
 namespace Onion.Application.Features.Mediator.Commands
 {
-    public record CreateProductCommand : IRequest<bool>
+    public record CreateProductCommand : IRequest<GetProductQueryResult>
     {
         public required string Name { get; init; }
         public decimal Price { get; init; }
